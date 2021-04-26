@@ -1,0 +1,25 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=8,walltime=24:00:00,vmem=30g
+#PBS -N app-hippunfold
+
+rm -rf output
+
+set -e
+set -x
+
+#copy input t1 under input in bids format
+mkdir -p input/sub-0/anat output
+ln -sf ../../../$(jq -r '.t1' config.json) input/sub-0/anat/sub-0_T1w.nii.gz
+cat > input/dataset_description.json <<EOF
+{
+    "BIDSVersion": "1.0.0",
+    "Name": "Temp dataset",
+    "Authors": [
+        "Soichi Hayashi"
+    ]
+}
+EOF
+
+time singularity run docker://khanlab/hippunfold:v0.4.0 input output participant --modality T1w --cores 8 
+
+
