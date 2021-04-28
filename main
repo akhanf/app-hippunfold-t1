@@ -20,6 +20,7 @@ cat > input/dataset_description.json <<EOF
 }
 EOF
 
-time singularity run docker://khanlab/hippunfold:v0.4.0 input output participant --modality T1w --cores 8 
+
+time singularity run `shub-cache docker://khanlab/hippunfold:v0.4.0` input output participant --modality T1w --cores 8 
 
 
