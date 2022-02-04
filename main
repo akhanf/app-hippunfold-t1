@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l nodes=1:ppn=8,walltime=24:00:00,vmem=30g
+#PBS -l nodes=1:ppn=8,walltime=6:00:00,vmem=16g
 #PBS -N app-hippunfold
 
 rm -rf output
@@ -21,6 +21,6 @@ cat > input/dataset_description.json <<EOF
 EOF
 
 
-time singularity run docker://khanlab/hippunfold:v0.4.1 input output participant --modality T1w --cores 8 
+time singularity run docker://khanlab/hippunfold:v1.0.0 input output participant --modality T1w --cores all 
 
 
