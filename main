@@ -21,6 +21,7 @@ cat > input/dataset_description.json <<EOF
 EOF
 
 
+[[ $(type -P "shub-cache") ]] && time singularity run `shub-cache docker://khanlab/hippunfold:v1.0.0` input output participant --modality T1w --cores all ||
 time singularity run docker://khanlab/hippunfold:v1.0.0 input output participant --modality T1w --cores all 
 
 
